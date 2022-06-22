@@ -156,6 +156,7 @@ function findNV() {
     if (currNV.xepLoai().toLowerCase().includes(search)) {
       result.push(currNV);
     }
+    
     renderListNV(result);
   }
 };
