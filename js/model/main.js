@@ -9,10 +9,6 @@
  *  6. Validation
  */
 //<------------------------------------------------->//
-document.getElementById("btnThem").onclick = function () {
-  document.getElementById("btnThemNV").style.display = "block";
-  resetForm();
-};
 var listNV = [];
 //thêm nhân viên
 function themNhanVien() {
@@ -46,7 +42,7 @@ function themNhanVien() {
     chucvu,
     gioLm
   );
-
+  alert("Thêm nhân viên thành công")
   listNV.push(newNhanvien);
   renderListNV();
   stayData();
@@ -94,6 +90,7 @@ function deleteNV(taikhoan) {
   listNV.splice(index, 1);
   renderListNV();
   stayData();
+  alert("Đã xóa nhân viên")
 }
 //update 1: lấy thông tin nhân viên
 function getNV(taikhoan) {
@@ -151,7 +148,7 @@ document.getElementById("btnCapNhat").onclick = function () {
 
   renderListNV();
   stayData();
-
+  alert("Cập nhật hoàn thành")
   document.getElementById("tknv").disabled = false;
   document.getElementById("btnThemNV").style.display = "block";
   document.getElementById("btnDong").click();
@@ -239,7 +236,7 @@ function validation() {
       spaHoTen.innerHTML = "Họ tên không được để trống";
       spaHoTen.style.display = "block";
     } else if (inpHoTen.validity.patternMismatch) {
-      spaHoTen.innerHTML = "Họ tên không được thêm ký tự đặc biệt vs số";
+      spaHoTen.innerHTML = "Họ tên không được thêm ký tự đặc biệt và số";
       spaHoTen.style.display = "block";
     } else {
       spaHoTen.innerHTML = "";
@@ -268,7 +265,7 @@ function validation() {
       spaPassword.style.display = "block";
     } else if (inpPassword.validity.patternMismatch) {
       spaPassword.innerHTML =
-        "Mật khẩu từ 6 đến 10 ký tự, gồm ít nhất 1 chữ hoa, 1 số và 1 ký tự đặc biệt";
+        "Mật khẩu từ 6 đến 10 ký tự, gồm ít nhất 1 chữ hoa, 1 số và 1 ký tự đặc biệt(ví dụ: !K%as9d@H )";
       spaPassword.style.display = "block";
     } else {
       spaPassword.innerHTML = "";
@@ -341,13 +338,19 @@ function resetForm() {
   document.getElementById("chucvu").value = "";
   document.getElementById("gioLam").value = "";
   //reset span error
-  document.getElementById("tbTKNV").value = "";
-  document.getElementById("tbTen").value = "";
-  document.getElementById("tbEmail").value = "";
-  document.getElementById("tbMatKhau").value = "";
-  document.getElementById("tbNgay").value = "";
-  document.getElementById("tbLuongCB").value = "";
-  document.getElementById("tbChucVu").value = "";
-  document.getElementById("tbGiolam").value = "";
+  document.getElementById("tbTKNV").innerHTML = "";
+  document.getElementById("tbTen").innerHTML = "";
+  document.getElementById("tbEmail").innerHTML = "";
+  document.getElementById("tbMatKhau").innerHTML = "";
+  document.getElementById("tbNgay").innerHTML = "";
+  document.getElementById("tbLuongCB").innerHTML = "";
+  document.getElementById("tbChucVu").innerHTML = "";
+  document.getElementById("tbGiolam").innerHTML = "";
 }
+//----------------------------------------------------------//
+document.getElementById("btnThem").onclick = function () {
+  document.getElementById("btnThemNV").style.display = "block";
+  document.getElementById("tknv").disabled = false;
+  resetForm();
+};
 getData();
