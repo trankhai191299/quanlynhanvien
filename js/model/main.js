@@ -42,7 +42,7 @@ function themNhanVien() {
     chucvu,
     gioLm
   );
-  alert("Thêm nhân viên thành công")
+  alert("Thêm nhân viên thành công");
   listNV.push(newNhanvien);
   renderListNV();
   stayData();
@@ -90,7 +90,7 @@ function deleteNV(taikhoan) {
   listNV.splice(index, 1);
   renderListNV();
   stayData();
-  alert("Đã xóa nhân viên")
+  alert("Đã xóa nhân viên");
 }
 //update 1: lấy thông tin nhân viên
 function getNV(taikhoan) {
@@ -148,7 +148,7 @@ document.getElementById("btnCapNhat").onclick = function () {
 
   renderListNV();
   stayData();
-  alert("Cập nhật hoàn thành")
+  alert("Cập nhật hoàn thành");
   document.getElementById("tknv").disabled = false;
   document.getElementById("btnThemNV").style.display = "block";
   document.getElementById("btnDong").click();
