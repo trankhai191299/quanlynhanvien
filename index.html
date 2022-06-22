@@ -217,7 +217,7 @@
 
           <!-- Modal body -->
           <div class="modal-body">
-            <form role="form">
+            <form role="form" id="formQLNV">
               <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -231,10 +231,13 @@
                     id="tknv"
                     class="form-control input-sm"
                     placeholder="Tài khoản"
+                    pattern="[a-zA-Z0-9]{4,6}$"
+                    maxlength="6"
+                    required
                   />
                 </div>
 
-                <span class="sp-thongbao" id="tbTKNV"></span>
+                <span class="sp-thongbao text-danger" id="tbTKNV"></span>
               </div>
 
               <div class="form-group">
@@ -250,9 +253,11 @@
                     id="name"
                     class="form-control input-sm"
                     placeholder="Họ và tên"
+                    required
+                    pattern="[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+$"
                   />
                 </div>
-                <span class="sp-thongbao" id="tbTen"></span>
+                <span class="sp-thongbao text-danger" id="tbTen"></span>
               </div>
 
               <div class="form-group">
@@ -268,10 +273,12 @@
                     id="email"
                     class="form-control input-sm"
                     placeholder="Email"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    required
                   />
                 </div>
 
-                <span class="sp-thongbao" id="tbEmail"></span>
+                <span class="sp-thongbao text-danger" id="tbEmail"></span>
               </div>
 
               <div class="form-group">
@@ -287,9 +294,12 @@
                     id="password"
                     class="form-control input-sm"
                     placeholder="Mật khẩu"
+                    pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{6,10}$"
+                    maxlength="10"
+                    required
                   />
                 </div>
-                <span class="sp-thongbao" id="tbMatKhau"></span>
+                <span class="sp-thongbao text-danger" id="tbMatKhau"></span>
               </div>
 
               <div class="form-group">
@@ -305,10 +315,11 @@
                     id="datepicker"
                     class="form-control"
                     placeholder="Ngày làm"
+                    required
                   />
                 </div>
 
-                <span class="sp-thongbao" id="tbNgay"></span>
+                <span class="sp-thongbao text-danger" id="tbNgay"></span>
               </div>
 
               <div class="form-group">
@@ -324,9 +335,11 @@
                     id="luongCB"
                     class="form-control input-sm"
                     placeholder="Lương cơ bản"
+                    pattern="[0-9]+$"
+                    required
                   />
                 </div>
-                <span class="sp-thongbao" id="tbLuongCB"></span>
+                <span class="sp-thongbao text-danger" id="tbLuongCB"></span>
               </div>
               <div class="form-group">
                 <div class="input-group">
@@ -335,7 +348,7 @@
                       ><i class="fa fa-briefcase"></i
                     ></span>
                   </div>
-                  <select class="form-control" id="chucvu">
+                  <select class="form-control" id="chucvu" required>
                     <option value="">Chọn chức vụ</option>
                     <option value="Sếp">Sếp</option>
                     <option value="Trưởng phòng">Trưởng phòng</option>
@@ -343,7 +356,7 @@
                   </select>
                 </div>
 
-                <span class="sp-thongbao" id="tbChucVu"></span>
+                <span class="sp-thongbao text-danger" id="tbChucVu"></span>
               </div>
               <div class="form-group">
                 <div class="input-group">
@@ -358,9 +371,11 @@
                     id="gioLam"
                     class="form-control input-sm"
                     placeholder="Giờ làm"
+                    pattern="[0-9]+$"
+                    required
                   />
                 </div>
-                <span class="sp-thongbao" id="tbGiolam"></span>
+                <span class="sp-thongbao text-danger" id="tbGiolam"></span>
               </div>
             </form>
           </div>

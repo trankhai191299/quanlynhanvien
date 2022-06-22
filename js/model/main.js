@@ -25,9 +25,14 @@ function themNhanVien() {
   var chucvu = document.getElementById("chucvu").value;
   var gioLm = +document.getElementById("gioLam").value;
 
+  var isValid = validation();
+  if (!isValid) {
+    return alert("Vui lòng kiểm tra lại các ô nhập!!!");
+  }
   var foundIndex = findTK(taikhoan);
-  if (foundIndex === -1) {
-    alert("Tài khoản không hợp lệ");
+  if (foundIndex !== -1) {
+    alert("Tài khoản trùng");
+    resetForm();
     return;
   }
 
@@ -124,6 +129,11 @@ document.getElementById("btnCapNhat").onclick = function () {
   var chucvu = document.getElementById("chucvu").value;
   var gioLm = +document.getElementById("gioLam").value;
 
+  var isValid = validation();
+  if (!isValid) {
+    return alert("Vui lòng kiểm tra lại các ô nhập!!!");
+  }
+
   var foundIndex = findTK(taikhoan);
   if (foundIndex === -1) {
     alert("Tài khoản không hợp lệ");
@@ -156,10 +166,10 @@ function findNV() {
     if (currNV.xepLoai().toLowerCase().includes(search)) {
       result.push(currNV);
     }
-    
+
     renderListNV(result);
   }
-};
+}
 //<------------------------------------------------->//
 //lưu, lấy + map dữ liệu lên local storage
 function stayData() {
@@ -204,8 +214,125 @@ function findTK(taikhoan) {
   }
   return -1;
 }
+//validation
+function validation() {
+  var isValid = document.getElementById("formQLNV").checkValidity();
+  if (!isValid) {
+    //check tài khoản
+    var inpTK = document.getElementById("tknv");
+    var spaTK = document.getElementById("tbTKNV");
+    if (inpTK.validity.valueMissing) {
+      spaTK.innerHTML = "Tài khoản không được để trống";
+      spaTK.style.display = "block";
+    } else if (inpTK.validity.patternMismatch) {
+      spaTK.innerHTML = "Tài khoản chỉ từ 4 đến 6 ký tự";
+      spaTK.style.display = "block";
+    } else {
+      spaTK.innerHTML = "";
+      spaTK.style.display = "none";
+    }
+
+    //check họ tên
+    var inpHoTen = document.getElementById("name");
+    var spaHoTen = document.getElementById("tbTen");
+    if (inpHoTen.validity.valueMissing) {
+      spaHoTen.innerHTML = "Họ tên không được để trống";
+      spaHoTen.style.display = "block";
+    } else if (inpHoTen.validity.patternMismatch) {
+      spaHoTen.innerHTML = "Họ tên không được thêm ký tự đặc biệt vs số";
+      spaHoTen.style.display = "block";
+    } else {
+      spaHoTen.innerHTML = "";
+      spaHoTen.style.display = "none";
+    }
+
+    //check email
+    var inpEmail = document.getElementById("email");
+    var spaEmail = document.getElementById("tbEmail");
+    if (inpEmail.validity.valueMissing) {
+      spaEmail.innerHTML = "Email không được để trống";
+      spaEmail.style.display = "block";
+    } else if (inpEmail.validity.patternMismatch) {
+      spaEmail.innerHTML = "Email không hợp lệ";
+      spaEmail.style.display = "block";
+    } else {
+      spaEmail.innerHTML = "";
+      spaEmail.style.display = "none";
+    }
+
+    //check password
+    var inpPassword = document.getElementById("password");
+    var spaPassword = document.getElementById("tbMatKhau");
+    if (inpPassword.validity.valueMissing) {
+      spaPassword.innerHTML = "Mật khẩu không được để trống";
+      spaPassword.style.display = "block";
+    } else if (inpPassword.validity.patternMismatch) {
+      spaPassword.innerHTML =
+        "Mật khẩu từ 6 đến 10 ký tự, gồm ít nhất 1 chữ hoa, 1 số và 1 ký tự đặc biệt";
+      spaPassword.style.display = "block";
+    } else {
+      spaPassword.innerHTML = "";
+      spaPassword.style.display = "none";
+    }
+
+    //check ngày làm
+    var inpNgayLam = document.getElementById("datepicker");
+    var spaNgayLam = document.getElementById("tbNgay");
+    if (inpNgayLam.validity.valueMissing) {
+      spaNgayLam.innerHTML = "Ngày làm không được để trống";
+      spaNgayLam.style.display = "block";
+    } else {
+      spaNgayLam.innerHTML = "";
+      spaNgayLam.style.display = "none";
+    }
+    //check lương cơ bản
+    var inpLuongCB = document.getElementById("luongCB");
+    var spaLuongCB = document.getElementById("tbLuongCB");
+    if (inpLuongCB.validity.valueMissing) {
+      spaLuongCB.innerHTML = "Lương cơ bản không được để trống";
+      spaLuongCB.style.display = "block";
+    } else if (inpLuongCB.validity.patternMismatch) {
+      spaLuongCB.innerHTML = "Lương cơ bản không được có chữ và ký tự đặc biệt";
+      spaLuongCB.style.display = "block";
+    } else if (+inpLuongCB.value < 1000000 || +inpLuongCB.value > 20000000) {
+      spaLuongCB.innerHTML = "Lương cơ bản chỉ từ 1.000.000 đến 20.000.000";
+      spaLuongCB.style.display = "block";
+    } else {
+      spaLuongCB.innerHTML = "";
+      spaLuongCB.style.display = "none";
+    }
+    //check chức vụ
+    var inpChucVu = document.getElementById("chucvu");
+    var spaChucVu = document.getElementById("tbChucVu");
+    if (inpChucVu.validity.valueMissing || inpChucVu.value === "") {
+      spaChucVu.innerHTML = "Xin hãy chọn chức vụ";
+      spaChucVu.style.display = "block";
+    } else {
+      spaChucVu.innerHTML = "";
+      spaChucVu.style.display = "none";
+    }
+    //check giờ làm
+    var inpGioLam = document.getElementById("gioLam");
+    var spaGioLam = document.getElementById("tbGiolam");
+    if (inpGioLam.validity.valueMissing) {
+      spaGioLam.innerHTML = "Xin hãy nhập số giờ làm";
+      spaGioLam.style.display = "block";
+    } else if (inpGioLam.validity.patternMismatch) {
+      spaGioLam.innerHTML = "Số giờ làm không được có chữ và ký tự đặc biệt";
+      spaGioLam.style.display = "block";
+    } else if (+inpGioLam.value < 80 || +inpGioLam.value > 200) {
+      spaGioLam.innerHTML = "Số giờ làm giới hạn từ 80 đến 200";
+      spaGioLam.style.display = "block";
+    } else {
+      spaGioLam.innerHTML = "";
+      spaGioLam.style.display = "none";
+    }
+  }
+  return isValid;
+}
 //reset form
 function resetForm() {
+  //reset input
   document.getElementById("tknv").value = "";
   document.getElementById("name").value = "";
   document.getElementById("email").value = "";
@@ -213,6 +340,14 @@ function resetForm() {
   document.getElementById("luongCB").value = "";
   document.getElementById("chucvu").value = "";
   document.getElementById("gioLam").value = "";
+  //reset span error
+  document.getElementById("tbTKNV").value = "";
+  document.getElementById("tbTen").value = "";
+  document.getElementById("tbEmail").value = "";
+  document.getElementById("tbMatKhau").value = "";
+  document.getElementById("tbNgay").value = "";
+  document.getElementById("tbLuongCB").value = "";
+  document.getElementById("tbChucVu").value = "";
+  document.getElementById("tbGiolam").value = "";
 }
-getData()
-
+getData();
