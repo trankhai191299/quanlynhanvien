@@ -275,6 +275,7 @@ function validation() {
     //check ngày làm
     var inpNgayLam = document.getElementById("datepicker");
     var spaNgayLam = document.getElementById("tbNgay");
+    var errMess = checkDate(inpNgayLam.value);
     if (inpNgayLam.validity.valueMissing) {
       spaNgayLam.innerHTML = "Ngày làm không được để trống";
       spaNgayLam.style.display = "block";
@@ -282,6 +283,14 @@ function validation() {
       spaNgayLam.innerHTML = "";
       spaNgayLam.style.display = "none";
     }
+    if (errMess === "") {
+      spaNgayLam.innerHTML = "";
+      spaNgayLam.style.display = "none";
+    } else {
+      spaNgayLam.innerHTML = errMess;
+      spaNgayLam.style.display = "block";
+    }
+
     //check lương cơ bản
     var inpLuongCB = document.getElementById("luongCB");
     var spaLuongCB = document.getElementById("tbLuongCB");
@@ -326,6 +335,59 @@ function validation() {
     }
   }
   return isValid;
+}
+//check ngày tháng năm
+function checkDate(date) {
+  var dateInCheck = date.split("/");
+  var month = dateInCheck[0];
+  var day = dateInCheck[1];
+  var year = dateInCheck[2];
+  var mess = "";
+  if (
+    day != parseInt(day) ||
+    month != parseInt(month) ||
+    year != parseInt(year)
+  ) {
+    mess = "Ngày tháng năm phải là số (định dạng dd/mm/yyyy)";
+  }
+  if (day === "" || month === "" || year === "") {
+    mess = "Xin mời nhập đầy đủ ngày tháng";
+  }
+  if (parseInt(day) < 1 || parseInt(month) < 1 || parseInt(month) > 12) {
+    mess = "Ngày từ 1 đến 30(31), tháng từ 1 đến 12";
+  }
+  if (parseInt(month) === 2 && parseInt(day) > 29 && parseInt(year) % 4 === 0) {
+    mess = "Tháng 2 năm nhuận tối đa chỉ có 29 ngày";
+  } else if (
+    parseInt(month) === 2 &&
+    parseInt(day) > 28 &&
+    parseInt(year) % 4 !== 0
+  ) {
+    mess = "Tháng 2 năm không nhuận chỉ có 28 ngày";
+  }
+  if (
+    parseInt(day) > 31 &&
+    (parseInt(month) === 1 ||
+      parseInt(month) === 3 ||
+      parseInt(month) === 5 ||
+      parseInt(month) === 7 ||
+      parseInt(month) === 8 ||
+      parseInt(month) === 10 ||
+      parseInt(month) === 12)
+  ) {
+    mess = "Các tháng 1, 3, 5, 7, 8, 10, 12 chỉ có 31 ngày";
+  }
+  if (
+    parseInt(day) > 30 &&
+    (parseInt(month) === 4 ||
+      parseInt(month) === 6 ||
+      parseInt(month) === 9 ||
+      parseInt(month) === 11)
+  ) {
+    mess = "Các tháng 4 6 9 11 chỉ có 30 ngày";
+  }
+
+  return mess;
 }
 //reset form
 function resetForm() {
