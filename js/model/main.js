@@ -55,8 +55,8 @@ function renderListNV(data) {
     data = listNV;
   }
   var html = "";
-  for (var i = 0; i < listNV.length; i++) {
-    var currentNV = listNV[i];
+  for (var i = 0; i < data.length; i++) {
+    var currentNV = data[i];
     html += `
     <tr>
       <td>${currentNV.taiKhoan}</td>
@@ -156,11 +156,11 @@ document.getElementById("btnCapNhat").onclick = function () {
 //search theo loại nhân viên
 function findNV() {
   var result = [];
-  var search = document.getElementById("searchName").value.toLowerCase().trim();
+  var tuKhoa = document.getElementById("searchName").value.toLowerCase().trim();
 
   for (var i = 0; i < listNV.length; i++) {
     var currNV = listNV[i];
-    if (currNV.xepLoai().toLowerCase().includes(search)) {
+    if (currNV.xepLoai().toLowerCase().trim().search(tuKhoa) != -1) {
       result.push(currNV);
     }
 
